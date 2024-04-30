@@ -8,7 +8,7 @@ gameBoard.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
 var currentSelection = [];
 var delay = 1200;
 
-let count = 4;
+let count = 5;
 let counterElement = document.getElementById("counter");
 
 let countdown = setTimeout(function tick() {
