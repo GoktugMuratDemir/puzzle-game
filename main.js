@@ -15,9 +15,9 @@ let countdown = setTimeout(function tick() {
   counterElement.innerText = count;
   count--;
   if (count >= 0) {
-    countdown = setTimeout(tick, 1000); 
+    countdown = setTimeout(tick, 1000);
   } else {
-    counterElement.parentNode.removeChild(counterElement); 
+    counterElement.parentNode.removeChild(counterElement);
   }
 }, 0);
 
@@ -30,6 +30,12 @@ function calculateRowCount(cardArray) {
   }
   return rowCount;
 }
+
+document.body.style.pointerEvents = "none";
+
+setTimeout(function () {
+  document.body.style.pointerEvents = "auto";
+}, 5000);
 
 // Shuffle function
 function shuffle(array) {
