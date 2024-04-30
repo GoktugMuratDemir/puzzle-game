@@ -88,7 +88,9 @@ function success() {
   currentSelection = [];
 }
 
-// If cards don't match
+/**
+ * Handles the logic when the player fails to match two selections.
+ */
 function fail() {
   currentSelection[0].classList.add("selected");
   currentSelection[1].classList.add("selected");
