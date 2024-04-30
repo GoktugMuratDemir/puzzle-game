@@ -1,106 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      #game-board {
-        display: grid;
-        gap: 10px;
-      }
-      .card {
-        width: 100px;
-        height: 100px;
-        background-color: #ccc;
-        display: inline-block;
-        margin: 10px;
-        text-align: center;
-        vertical-align: top;
-        line-height: 100px;
-        font-size: 2em;
-        cursor: pointer;
-      }
-      .matched {
-        background-color: #398439;
-      }
-      .error {
-        background-color: #d9534f;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div id="game-board"></div>
 
-    <script>
-      var cards = ["A", "B", "C", "D", "E", "F", "G", "H"];
-      cards = [...cards, ...cards];
-      var currentSelection = [];
-      var delay = 1200;
-      var rowCount = 4;
-      var gameBoard = document.getElementById("game-board");
-      gameBoard.style.gridTemplateColumns = `repeat(${rowCount}, 1fr)`;
-      gameBoard.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
-
-      // Shuffle function
-      function shuffle(array) {
-        let counter = array.length;
-        while (counter > 0) {
-          let index = Math.floor(Math.random() * counter);
-          counter--;
-          let temp = array[counter];
-          array[counter] = array[index];
-          array[index] = temp;
-        }
-        return array;
-      }
-
-      // Game initialization
-      function gameInit() {
-        var shuffledCards = shuffle(cards);
-        for (let i = 0; i < shuffledCards.length; i++) {
-          var card = document.createElement("div");
-          card.classList.add("card");
-          card.dataset.item = shuffledCards[i];
-          card.innerHTML = `<p>${shuffledCards[i]}</p>`;
-          card.addEventListener("click", revealCard);
-          gameBoard.appendChild(card);
-        }
-      }
-
-      // Reveal card function
-      function revealCard() {
-        if (currentSelection.length >= 2) return;
-
-        this.innerHTML = this.dataset.item;
-        currentSelection.push(this);
-
-        if (currentSelection.length === 2) {
-          currentSelection[0].dataset.item === currentSelection[1].dataset.item
-            ? success()
-            : fail();
-        }
-      }
-
-      // If cards match
-      function success() {
-        currentSelection[0].classList.add("matched");
-        currentSelection[1].classList.add("matched");
-        currentSelection = [];
-      }
-
-      // If cards don't match
-      function fail() {
-        currentSelection[0].classList.add("error");
-        currentSelection[1].classList.add("error");
-
-        setTimeout(function () {
-          currentSelection[0].innerHTML = "";
-          currentSelection[1].innerHTML = "";
-          currentSelection[0].classList.remove("error");
-          currentSelection[1].classList.remove("error");
-          currentSelection = [];
-        }, 1000);
-      }
-
-      gameInit();
+    <script src="main.js">
+      
     </script>
   </body>
 </html>
