@@ -6,7 +6,7 @@ gameBoard.style.gridTemplateColumns = `repeat(${rowCount}, 1fr)`;
 gameBoard.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
 
 var currentSelection = [];
-var delay = 1200;
+var delay = 1000;
 
 let count = 5;
 let counterElement = document.getElementById("counter");
@@ -15,7 +15,7 @@ let countdown = setTimeout(function tick() {
   counterElement.innerText = count;
   count--;
   if (count >= 0) {
-    countdown = setTimeout(tick, 1000);
+    countdown = setTimeout(tick, delay);
   } else {
     counterElement.parentNode.removeChild(counterElement);
   }
@@ -108,8 +108,8 @@ function fail() {
       currentSelection[0].classList.remove("error");
       currentSelection[1].classList.remove("error");
       currentSelection = [];
-    }, 1000);
-  }, 1000);
+    }, delay);
+  }, delay);
 }
 
 gameInit();
