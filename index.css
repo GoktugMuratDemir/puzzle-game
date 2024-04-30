@@ -44,6 +44,7 @@ body {
 
 .matched {
   background-color: #398439;
+  color: black !important;
 }
 .error {
   background-color: #d9534f;
