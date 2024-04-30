@@ -11,34 +11,34 @@ var delay = 1200;
 let count = 5;
 let counterElement = document.getElementById("counter");
 
-let countdown = setTimeout(function tick() {
+let countdown = setTimeout(() => {
   counterElement.innerText = count;
   count--;
   if (count >= 0) {
-    countdown = setTimeout(tick, 1000);
+    countdown = setTimeout(() => tick(), 1000);
   } else {
     counterElement.parentNode.removeChild(counterElement);
   }
 }, 0);
 
-function calculateRowCount(cardArray) {
-  var rowCount;
+const calculateRowCount = (cardArray) => {
+  let rowCount;
   if (cardArray.length % 4 === 0) {
     rowCount = cardArray.length / 4;
   } else {
     rowCount = Math.ceil(cardArray.length / 4);
   }
   return rowCount;
-}
+};
 
 document.body.style.pointerEvents = "none";
 
-setTimeout(function () {
+setTimeout(() => {
   document.body.style.pointerEvents = "auto";
 }, 5000);
 
 // Shuffle function
-function shuffle(array) {
+const shuffle = (array) => {
   let counter = array.length;
   while (counter > 0) {
     let index = Math.floor(Math.random() * counter);
@@ -48,10 +48,10 @@ function shuffle(array) {
     array[index] = temp;
   }
   return array;
-}
+};
 
 // Game initialization
-function gameInit() {
+const gameInit = () => {
   var shuffledCards = shuffle(cards);
   for (let i = 0; i < shuffledCards.length; i++) {
     var card = document.createElement("div");
@@ -61,10 +61,10 @@ function gameInit() {
     card.addEventListener("click", revealCard);
     gameBoard.appendChild(card);
   }
-}
+};
 
 // Reveal card function
-function revealCard() {
+const revealCard = () => {
   if (currentSelection.length >= 2) return;
 
   this.innerHTML = this.dataset.item;
@@ -77,32 +77,32 @@ function revealCard() {
       ? success()
       : fail();
   }
-}
+};
 
 // If cards match
-function success() {
+const success = () => {
   currentSelection[0].classList.add("matched");
   currentSelection[1].classList.add("matched");
   currentSelection[0].classList.remove("selected");
   currentSelection[1].classList.remove("selected");
   currentSelection = [];
-}
+};
 
 /**
  * Handles the logic when the player fails to match two selections.
  */
-function fail() {
+const fail = () => {
   currentSelection[0].classList.add("selected");
   currentSelection[1].classList.add("selected");
 
-  setTimeout(function () {
+  setTimeout(() => {
     currentSelection[0].classList.remove("selected");
     currentSelection[1].classList.remove("selected");
 
     currentSelection[0].classList.add("error");
     currentSelection[1].classList.add("error");
 
-    setTimeout(function () {
+    setTimeout(() => {
       currentSelection[0].innerHTML = "";
       currentSelection[1].innerHTML = "";
       currentSelection[0].classList.remove("error");
@@ -110,6 +110,6 @@ function fail() {
       currentSelection = [];
     }, 1000);
   }, 1000);
-}
+};
 
 gameInit();
