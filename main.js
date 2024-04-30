@@ -1,82 +1,107 @@
 var cards = ["A", "B", "C", "D", "E", "F", "G", "H"];
-      cards = [...cards, ...cards];
-      var rowCount = calculateRowCount(cards);
-      var gameBoard = document.getElementById("game-board");
-      gameBoard.style.gridTemplateColumns = `repeat(${rowCount}, 1fr)`;
-      gameBoard.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
+cards = [...cards, ...cards];
+var rowCount = calculateRowCount(cards);
+var gameBoard = document.getElementById("game-board");
+gameBoard.style.gridTemplateColumns = `repeat(${rowCount}, 1fr)`;
+gameBoard.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
 
-      var currentSelection = [];
-      var delay = 1200;
+var currentSelection = [];
+var delay = 1200;
 
-      function calculateRowCount(cardArray) {
-        var rowCount;
-        if (cardArray.length % 4 === 0) {
-          rowCount = cardArray.length / 4;
-        } else {
-          rowCount = Math.ceil(cardArray.length / 4);
-        }
-        return rowCount;
-      }
+let count = 4;
+let counterElement = document.getElementById("counter");
 
-      // Shuffle function
-      function shuffle(array) {
-        let counter = array.length;
-        while (counter > 0) {
-          let index = Math.floor(Math.random() * counter);
-          counter--;
-          let temp = array[counter];
-          array[counter] = array[index];
-          array[index] = temp;
-        }
-        return array;
-      }
+let countdown = setTimeout(function tick() {
+  counterElement.innerText = count;
+  count--;
+  if (count >= 0) {
+    countdown = setTimeout(tick, 1000); 
+  } else {
+    counterElement.parentNode.removeChild(counterElement); 
+  }
+}, 0);
 
-      // Game initialization
-      function gameInit() {
-        var shuffledCards = shuffle(cards);
-        for (let i = 0; i < shuffledCards.length; i++) {
-          var card = document.createElement("div");
-          card.classList.add("card");
-          card.dataset.item = shuffledCards[i];
-          card.innerHTML = `<p>${shuffledCards[i]}</p>`;
-          card.addEventListener("click", revealCard);
-          gameBoard.appendChild(card);
-        }
-      }
+function calculateRowCount(cardArray) {
+  var rowCount;
+  if (cardArray.length % 4 === 0) {
+    rowCount = cardArray.length / 4;
+  } else {
+    rowCount = Math.ceil(cardArray.length / 4);
+  }
+  return rowCount;
+}
 
-      // Reveal card function
-      function revealCard() {
-        if (currentSelection.length >= 2) return;
+// Shuffle function
+function shuffle(array) {
+  let counter = array.length;
+  while (counter > 0) {
+    let index = Math.floor(Math.random() * counter);
+    counter--;
+    let temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
+  }
+  return array;
+}
 
-        this.innerHTML = this.dataset.item;
-        currentSelection.push(this);
+// Game initialization
+function gameInit() {
+  var shuffledCards = shuffle(cards);
+  for (let i = 0; i < shuffledCards.length; i++) {
+    var card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.item = shuffledCards[i];
+    card.innerHTML = `<p>${shuffledCards[i]}</p>`;
+    card.addEventListener("click", revealCard);
+    gameBoard.appendChild(card);
+  }
+}
 
-        if (currentSelection.length === 2) {
-          currentSelection[0].dataset.item === currentSelection[1].dataset.item
-            ? success()
-            : fail();
-        }
-      }
+// Reveal card function
+function revealCard() {
+  if (currentSelection.length >= 2) return;
 
-      // If cards match
-      function success() {
-        currentSelection[0].classList.add("matched");
-        currentSelection[1].classList.add("matched");
-        currentSelection = [];
-      }
+  this.innerHTML = this.dataset.item;
+  currentSelection.push(this);
 
-      // If cards don't match
-      function fail() {
-        currentSelection[0].classList.add("error");
-        currentSelection[1].classList.add("error");
+  this.classList.add("selected");
 
-        setTimeout(function () {
-          currentSelection[0].innerHTML = "";
-          currentSelection[1].innerHTML = "";
-          currentSelection[0].classList.remove("error");
-          currentSelection[1].classList.remove("error");
-          currentSelection = [];
-        }, 1000);
-      }
+  if (currentSelection.length === 2) {
+    currentSelection[0].dataset.item === currentSelection[1].dataset.item
+      ? success()
+      : fail();
+  }
+}
 
-      gameInit();
+// If cards match
+function success() {
+  currentSelection[0].classList.add("matched");
+  currentSelection[1].classList.add("matched");
+  currentSelection[0].classList.remove("selected");
+  currentSelection[1].classList.remove("selected");
+  currentSelection = [];
+}
+
+// If cards don't match
+function fail() {
+  currentSelection[0].classList.add("selected");
+  currentSelection[1].classList.add("selected");
+
+  setTimeout(function () {
+    currentSelection[0].classList.remove("selected");
+    currentSelection[1].classList.remove("selected");
+
+    currentSelection[0].classList.add("error");
+    currentSelection[1].classList.add("error");
+
+    setTimeout(function () {
+      currentSelection[0].innerHTML = "";
+      currentSelection[1].innerHTML = "";
+      currentSelection[0].classList.remove("error");
+      currentSelection[1].classList.remove("error");
+      currentSelection = [];
+    }, 1000);
+  }, 1000);
+}
+
+gameInit();
