@@ -29,11 +29,21 @@ var scorePoint = {
 
 var scoreBoard = document.getElementById("score-board");
 
+/**
+ * Updates the score by adding the specified amount and updates the score board.
+ * @param {number} amount - The amount to be added to the score.
+ */
 function updateScore(amount) {
   score += amount;
   scoreBoard.innerText = "Score: " + score;
 }
 
+/**
+ * Calculates the number of rows needed to display a given array of cards.
+ *
+ * @param {Array} cardArray - The array of cards.
+ * @returns {number} The number of rows needed to display the cards.
+ */
 function calculateRowCount(cardArray) {
   var rowCount;
   if (cardArray.length % 4 === 0) {
@@ -44,8 +54,11 @@ function calculateRowCount(cardArray) {
   return rowCount;
 }
 
-// Fisher-Yates (veya Knuth) O(N)
-// Shuffle function
+/**
+ * Shuffles the elements in the given array in place.
+ * @param {Array} array - The array to be shuffled.
+ * @returns {Array} - The shuffled array.
+ */
 function shuffle(array) {
   let counter = array.length;
   while (counter > 0) {
@@ -58,6 +71,10 @@ function shuffle(array) {
   return array;
 }
 
+
+/**
+ * Starts the countdown timer for the game.
+ */
 function startCountDown() {
   let counterElement = document.getElementById("counter");
   let countdownTimes = 2;
@@ -93,7 +110,10 @@ function startCountDown() {
   }, delay * remainingTime);
 }
 
-// Game initialization
+
+/**
+ * Initializes the game by setting up the game board and starting the countdown.
+ */
 function gameInit() {
   scoreBoard.style.display = "flex";
   quitBtn.style.display = "inline-block";
@@ -111,9 +131,11 @@ function gameInit() {
   }
 }
 
-// Reveal card function
+
+/**
+ * Reveals a card and checks for a match.
+ */
 function revealCard() {
-  // Check if the card is already selected
   if (this.classList.contains("selected")) return;
 
   if (currentSelection.length >= 2) return;
@@ -134,6 +156,9 @@ function reloadGame() {
   location.reload();
 }
 
+/**
+ * Checks if the game has been successfully completed.
+ */
 function successGame() {
   var matchedCards = document.querySelectorAll(".matched");
   if (matchedCards.length === cards.length) {
@@ -141,6 +166,11 @@ function successGame() {
   }
 }
 
+/**
+ * Handles the failure of the game based on the given status.
+ * @param {string} status - The status of the game failure.
+ * @returns {void}
+ */
 function failGame(status) {
   if (status === "fail") {
     alert("You have failed the game!");
@@ -152,7 +182,9 @@ function failGame(status) {
   reloadGame();
 }
 
-// If cards match
+/**
+ * Marks the current selection as matched, removes the "selected" class, updates the score, and triggers the success game logic.
+ */
 function success() {
   currentSelection[0].classList.add("matched");
   currentSelection[1].classList.add("matched");
@@ -164,7 +196,7 @@ function success() {
 }
 
 /**
- * Handles the logic when the player fails to match two selections.
+ * Handles the logic when the player fails to match two tiles.
  */
 function fail() {
   currentSelection[0].classList.add("selected");
@@ -188,4 +220,3 @@ function fail() {
   updateScore(scorePoint.fail);
 }
 
-// gameInit();
