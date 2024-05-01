@@ -13,8 +13,7 @@ document.getElementById("startButton").addEventListener("click", function () {
 var currentSelection = [];
 var delay = 1000;
 
-let count = 5;
-let countDown = 60;
+let remainingTime = 5;
 
 function calculateRowCount(cardArray) {
   var rowCount;
@@ -42,13 +41,19 @@ function shuffle(array) {
 
 function startCountDown() {
   let counterElement = document.getElementById("counter");
+
   let countdown = setTimeout(function tick() {
-    counterElement.innerText = count;
-    count--;
-    if (count >= 0) {
+    counterElement.innerText = remainingTime;
+    remainingTime--;
+    if (remainingTime >= 0) {
       countdown = setTimeout(tick, delay);
     } else {
-      counterElement.parentNode.removeChild(counterElement);
+      if (counterElement.innerText === '0') {
+        remainingTime = 60;
+        countdown = setTimeout(tick, delay);
+      } else {
+        counterElement.parentNode.removeChild(counterElement);
+      }
     }
   }, 0);
 
@@ -56,7 +61,7 @@ function startCountDown() {
 
   setTimeout(function () {
     document.body.style.pointerEvents = "auto";
-  }, 5000);
+  }, delay*remainingTime);
 }
 
 // Game initialization
