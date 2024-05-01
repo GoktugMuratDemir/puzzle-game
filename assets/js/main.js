@@ -19,7 +19,7 @@ quitBtn.addEventListener("click", function () {
 var currentSelection = [];
 var delay = 1000;
 
-let remainingTime = 2;
+let remainingTime = 5;
 
 var score = 0;
 var scorePoint = {
