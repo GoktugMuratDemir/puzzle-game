@@ -61,6 +61,11 @@ body {
   color: black !important;
 }
 
+#counter {
+  font-size: 2em;
+  margin: 10px;
+}
+
 #startButton {
   background-color: #4CAF50; /* Yeşil */
   border: none;

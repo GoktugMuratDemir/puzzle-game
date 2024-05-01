@@ -19,7 +19,7 @@ var score = 0;
 var scorePoint = {
   success: 10,
   fail: -5,
-}
+};
 
 var scoreBoard = document.getElementById("score-board");
 
@@ -57,14 +57,18 @@ function startCountDown() {
   let countdownTimes = 2;
 
   let countdown = setTimeout(function tick() {
-    counterElement.innerText = remainingTime;
+    if (countdownTimes === 2) {
+      counterElement.innerText = `The Game Will Start: ${remainingTime}`;
+    } else {
+      counterElement.innerText = `The Time Left: ${remainingTime}`;
+    }
     remainingTime--;
     if (remainingTime >= 0) {
       countdown = setTimeout(tick, delay);
     } else {
       countdownTimes--;
       if (countdownTimes > 0) {
-        if (counterElement.innerText === "0") {
+        if (counterElement.innerText.endsWith("0")) {
           remainingTime = 100;
           countdown = setTimeout(tick, delay);
         } else {
@@ -85,7 +89,6 @@ function startCountDown() {
 
 // Game initialization
 function gameInit() {
-
   scoreBoard.style.display = "flex";
 
   startCountDown();
