@@ -1,3 +1,7 @@
+/**
+ * Styles for the puzzle game.
+ */
+
 body {
   margin: 0;
   padding: 0;
@@ -9,16 +13,23 @@ body {
   align-items: center;
   background-color: #f8f9fa;
 }
+
+/**
+ * Styles for the game board.
+ */
 #game-board {
   display: grid;
   gap: 10px;
 }
+
+/**
+ * Styles for the game cards.
+ */
 .card {
   width: 100px;
   height: 100px;
   padding: 8px;
   border-radius: 24px;
-  /* color: transparent; */
   background-color: #ccc;
   display: inline-block;
   margin: 10px;
@@ -30,6 +41,9 @@ body {
   animation: colorChange 5s forwards, fadeIn 1s ease-in-out;
 }
 
+/**
+ * Animation keyframes for changing card color.
+ */
 @keyframes colorChange {
   0% {
     color: black;
@@ -42,30 +56,48 @@ body {
   }
 }
 
+/**
+ * Animation keyframes for fading in the card.
+ */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-
-
+/**
+ * Styles for matched cards.
+ */
 .matched {
   background-color: #398439;
   color: black !important;
 }
+
+/**
+ * Styles for error state.
+ */
 .error {
   background-color: #d9534f;
 }
+
+/**
+ * Styles for selected cards.
+ */
 .selected {
   background-color: #f0ad4e;
   color: black !important;
 }
 
+/**
+ * Styles for the counter element.
+ */
 #counter {
   font-size: 2em;
   margin: 10px;
 }
 
+/**
+ * Styles for the quit button.
+ */
 #quitButton {
   background-color: #f44336;
   border: none;
@@ -81,11 +113,13 @@ body {
   border-radius: 12px;
   cursor: pointer;
   margin-top: 12px;
-
 }
 
+/**
+ * Styles for the start button.
+ */
 #startButton {
-  background-color: #4CAF50; /* Yeşil */
+  background-color: #4CAF50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -99,10 +133,16 @@ body {
   border-radius: 12px;
 }
 
+/**
+ * Styles for the start button on hover.
+ */
 #startButton:hover {
   background-color: #45a049;
 }
 
+/**
+ * Styles for the score board.
+ */
 #score-board {
   display: none;
   justify-content: space-between;
