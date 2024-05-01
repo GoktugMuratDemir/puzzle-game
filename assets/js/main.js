@@ -1,4 +1,4 @@
-var cards = ["A", "B", "C", "D"];
+var cards = ["A", "B"];
 cards = [...cards, ...cards];
 var rowCount = calculateRowCount(cards);
 var gameBoard = document.getElementById("game-board");
@@ -52,7 +52,7 @@ function startCountDown() {
       countdownTimes--;
       if (countdownTimes > 0) {
         if (counterElement.innerText === '0') {
-          remainingTime = 2;
+          remainingTime = 100;
           countdown = setTimeout(tick, delay);
         } else {
           counterElement.parentNode.removeChild(counterElement);
@@ -101,13 +101,22 @@ function revealCard() {
   }
 }
 
+function finishGame() {
+  var matchedCards = document.querySelectorAll(".matched");
+  if (matchedCards.length === cards.length) {
+    alert("Congratulations! You have won the game!");
+  }
+}
+
+
 // If cards match
-function success() {
+function success()  {
   currentSelection[0].classList.add("matched");
   currentSelection[1].classList.add("matched");
   currentSelection[0].classList.remove("selected");
   currentSelection[1].classList.remove("selected");
   currentSelection = [];
+  finishGame();
 }
 
 /**
