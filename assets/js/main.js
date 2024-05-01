@@ -64,9 +64,9 @@ function startCountDown() {
 
   let countdown = setTimeout(function tick() {
     if (countdownTimes === 2) {
-      counterElement.innerText = `The Game Will Start: ${remainingTime}`;
+      counterElement.innerText = `The Game Will Start: ${remainingTime} s`;
     } else {
-      counterElement.innerText = `The Time Left: ${remainingTime}`;
+      counterElement.innerText = `The Time Left: ${remainingTime} s`;
     }
     remainingTime--;
     if (remainingTime >= 0) {
