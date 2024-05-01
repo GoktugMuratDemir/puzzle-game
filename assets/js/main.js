@@ -10,6 +10,12 @@ document.getElementById("startButton").addEventListener("click", function () {
   gameInit();
 });
 
+const quitBtn = document.getElementById("quitButton");
+
+quitBtn.addEventListener("click", function () {
+  failGame('fail');
+});
+
 var currentSelection = [];
 var delay = 1000;
 
@@ -90,6 +96,7 @@ function startCountDown() {
 // Game initialization
 function gameInit() {
   scoreBoard.style.display = "flex";
+  quitBtn.style.display = "inline-block";
 
   startCountDown();
 

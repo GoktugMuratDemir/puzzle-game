@@ -66,6 +66,24 @@ body {
   margin: 10px;
 }
 
+#quitButton {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 12px;
+
+}
+
 #startButton {
   background-color: #4CAF50; /* Yeşil */
   border: none;
