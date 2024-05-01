@@ -1,25 +1,20 @@
-var cards = ["A", "B", "C", "D", "E", "F", "G", "H"];
+var cards = ["A", "B", "C", "D"];
 cards = [...cards, ...cards];
 var rowCount = calculateRowCount(cards);
 var gameBoard = document.getElementById("game-board");
 gameBoard.style.gridTemplateColumns = `repeat(${rowCount}, 1fr)`;
 gameBoard.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
 
+document.getElementById("startButton").addEventListener("click", function () {
+  this.style.display = "none";
+  gameInit();
+});
+
 var currentSelection = [];
 var delay = 1000;
 
 let count = 5;
-let counterElement = document.getElementById("counter");
-
-let countdown = setTimeout(function tick() {
-  counterElement.innerText = count;
-  count--;
-  if (count >= 0) {
-    countdown = setTimeout(tick, delay);
-  } else {
-    counterElement.parentNode.removeChild(counterElement);
-  }
-}, 0);
+let countDown = 60;
 
 function calculateRowCount(cardArray) {
   var rowCount;
@@ -31,12 +26,7 @@ function calculateRowCount(cardArray) {
   return rowCount;
 }
 
-document.body.style.pointerEvents = "none";
-
-setTimeout(function () {
-  document.body.style.pointerEvents = "auto";
-}, 5000);
-
+// Fisher-Yates (veya Knuth) O(N)
 // Shuffle function
 function shuffle(array) {
   let counter = array.length;
@@ -50,8 +40,29 @@ function shuffle(array) {
   return array;
 }
 
+function startCountDown() {
+  let counterElement = document.getElementById("counter");
+  let countdown = setTimeout(function tick() {
+    counterElement.innerText = count;
+    count--;
+    if (count >= 0) {
+      countdown = setTimeout(tick, delay);
+    } else {
+      counterElement.parentNode.removeChild(counterElement);
+    }
+  }, 0);
+
+  document.body.style.pointerEvents = "none";
+
+  setTimeout(function () {
+    document.body.style.pointerEvents = "auto";
+  }, 5000);
+}
+
 // Game initialization
 function gameInit() {
+  startCountDown();
+
   var shuffledCards = shuffle(cards);
   for (let i = 0; i < shuffledCards.length; i++) {
     var card = document.createElement("div");
@@ -112,4 +123,4 @@ function fail() {
   }, delay);
 }
 
-gameInit();
+// gameInit();

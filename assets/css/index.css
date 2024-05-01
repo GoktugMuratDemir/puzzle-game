@@ -53,3 +53,22 @@ body {
   background-color: #f0ad4e;
   color: black !important;
 }
+
+#startButton {
+  background-color: #4CAF50; /* Yeşil */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border-radius: 12px;
+}
+
+#startButton:hover {
+  background-color: #45a049;
+}
