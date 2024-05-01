@@ -13,7 +13,7 @@ document.getElementById("startButton").addEventListener("click", function () {
 var currentSelection = [];
 var delay = 1000;
 
-let remainingTime = 5;
+let remainingTime = 2;
 
 function calculateRowCount(cardArray) {
   var rowCount;
@@ -41,6 +41,7 @@ function shuffle(array) {
 
 function startCountDown() {
   let counterElement = document.getElementById("counter");
+  let countdownTimes = 2;
 
   let countdown = setTimeout(function tick() {
     counterElement.innerText = remainingTime;
@@ -48,11 +49,16 @@ function startCountDown() {
     if (remainingTime >= 0) {
       countdown = setTimeout(tick, delay);
     } else {
-      if (counterElement.innerText === '0') {
-        remainingTime = 60;
-        countdown = setTimeout(tick, delay);
+      countdownTimes--;
+      if (countdownTimes > 0) {
+        if (counterElement.innerText === '0') {
+          remainingTime = 2;
+          countdown = setTimeout(tick, delay);
+        } else {
+          counterElement.parentNode.removeChild(counterElement);
+        }
       } else {
-        counterElement.parentNode.removeChild(counterElement);
+        alert("Countdown finished");
       }
     }
   }, 0);
