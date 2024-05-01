@@ -56,6 +56,9 @@ function shuffle(array) {
   return array;
 }
 
+/**
+ * Starts the countdown for the game.
+ */
 function startCountDown() {
   let counterElement = document.getElementById("counter");
   let countdownTimes = 2;
@@ -89,6 +92,9 @@ function startCountDown() {
   }, delay * remainingTime);
 }
 
+/**
+ * Initializes the game by setting up the game board, starting the countdown, and creating the cards.
+ */
 function gameInit() {
   scoreBoard.style.display = "flex";
   quitBtn.style.display = "inline-block";
@@ -106,8 +112,10 @@ function gameInit() {
   }
 }
 
+/**
+ * Reveals a card and checks for a match.
+ */
 function revealCard() {
-  // Check if the card is already selected
   if (this.classList.contains("selected")) return;
 
   if (currentSelection.length >= 2) return;
@@ -124,10 +132,16 @@ function revealCard() {
   }
 }
 
+/**
+ * Reloads the game by refreshing the current page.
+ */
 function reloadGame() {
   location.reload();
 }
 
+/**
+ * Checks if the game has been successfully completed.
+ */
 function successGame() {
   var matchedCards = document.querySelectorAll(".matched");
   if (matchedCards.length === cards.length) {
@@ -135,6 +149,11 @@ function successGame() {
   }
 }
 
+/**
+ * Handles the failure of the game based on the given status.
+ * @param {string} status - The status of the game failure.
+ * @returns {void}
+ */
 function failGame(status) {
   if (status === "fail") {
     alert("You have failed the game!");
@@ -146,6 +165,9 @@ function failGame(status) {
   reloadGame();
 }
 
+/**
+ * Marks the current selection as matched, removes the "selected" class, updates the score, and triggers the success game logic.
+ */
 function success() {
   currentSelection[0].classList.add("matched");
   currentSelection[1].classList.add("matched");
@@ -156,6 +178,9 @@ function success() {
   successGame();
 }
 
+/**
+ * Handles the logic when the player fails to match two cards.
+ */
 function fail() {
   currentSelection[0].classList.add("selected");
   currentSelection[1].classList.add("selected");
