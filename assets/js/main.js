@@ -106,6 +106,9 @@ function gameInit() {
 
 // Reveal card function
 function revealCard() {
+  // Check if the card is already selected
+  if (this.classList.contains("selected")) return;
+
   if (currentSelection.length >= 2) return;
 
   this.innerHTML = this.dataset.item;
