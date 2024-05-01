@@ -1,4 +1,4 @@
-var cards = ["A", "B"];
+var cards = ["A", "B", "C", "D", "E", "F", "G", "H"];
 cards = [...cards, ...cards];
 var rowCount = calculateRowCount(cards);
 var gameBoard = document.getElementById("game-board");
@@ -51,14 +51,14 @@ function startCountDown() {
     } else {
       countdownTimes--;
       if (countdownTimes > 0) {
-        if (counterElement.innerText === '0') {
+        if (counterElement.innerText === "0") {
           remainingTime = 100;
           countdown = setTimeout(tick, delay);
         } else {
           counterElement.parentNode.removeChild(counterElement);
         }
       } else {
-        alert("Countdown finished");
+        failGame("timeout");
       }
     }
   }, 0);
@@ -67,7 +67,7 @@ function startCountDown() {
 
   setTimeout(function () {
     document.body.style.pointerEvents = "auto";
-  }, delay*remainingTime);
+  }, delay * remainingTime);
 }
 
 // Game initialization
@@ -101,22 +101,36 @@ function revealCard() {
   }
 }
 
-function finishGame() {
+function reloadGame() {
+  location.reload();
+}
+
+function successGame() {
   var matchedCards = document.querySelectorAll(".matched");
   if (matchedCards.length === cards.length) {
     alert("Congratulations! You have won the game!");
   }
 }
 
+function failGame(status) {
+  if (status === "fail") {
+    alert("You have failed the game!");
+  }
+  if (status === "timeout") {
+    alert("You have failed the game because of the timeout!");
+  }
+
+  reloadGame();
+}
 
 // If cards match
-function success()  {
+function success() {
   currentSelection[0].classList.add("matched");
   currentSelection[1].classList.add("matched");
   currentSelection[0].classList.remove("selected");
   currentSelection[1].classList.remove("selected");
   currentSelection = [];
-  finishGame();
+  successGame();
 }
 
 /**
