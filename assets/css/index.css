@@ -27,7 +27,7 @@ body {
   line-height: 100px;
   font-size: 2em;
   cursor: pointer;
-  animation: colorChange 5s forwards;
+  animation: colorChange 5s forwards, fadeIn 1s ease-in-out;
 }
 
 @keyframes colorChange {
@@ -41,6 +41,13 @@ body {
     color: transparent;
   }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
 
 .matched {
   background-color: #398439;
