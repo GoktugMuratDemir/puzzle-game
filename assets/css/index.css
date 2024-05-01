@@ -72,3 +72,12 @@ body {
 #startButton:hover {
   background-color: #45a049;
 }
+
+#score-board {
+  display: none;
+  justify-content: space-between;
+  width: 75%;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ccc;
+}

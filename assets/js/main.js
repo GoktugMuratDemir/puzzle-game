@@ -13,7 +13,20 @@ document.getElementById("startButton").addEventListener("click", function () {
 var currentSelection = [];
 var delay = 1000;
 
-let remainingTime = 2;
+let remainingTime = 5;
+
+var score = 0;
+var scorePoint = {
+  success: 10,
+  fail: -5,
+}
+
+var scoreBoard = document.getElementById("score-board");
+
+function updateScore(amount) {
+  score += amount;
+  scoreBoard.innerText = "Score: " + score;
+}
 
 function calculateRowCount(cardArray) {
   var rowCount;
@@ -72,6 +85,9 @@ function startCountDown() {
 
 // Game initialization
 function gameInit() {
+
+  scoreBoard.style.display = "flex";
+
   startCountDown();
 
   var shuffledCards = shuffle(cards);
@@ -130,6 +146,7 @@ function success() {
   currentSelection[0].classList.remove("selected");
   currentSelection[1].classList.remove("selected");
   currentSelection = [];
+  updateScore(scorePoint.success);
   successGame();
 }
 
@@ -155,6 +172,7 @@ function fail() {
       currentSelection = [];
     }, delay);
   }, delay);
+  updateScore(scorePoint.fail);
 }
 
 // gameInit();
