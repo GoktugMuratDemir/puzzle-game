@@ -145,7 +145,10 @@ function reloadGame() {
 function successGame() {
   var matchedCards = document.querySelectorAll(".matched");
   if (matchedCards.length === cards.length) {
-    alert("Congratulations! You have won the game!");
+    alert(
+      `Congratulations! You have won the game!, Your score is: ${score} points `
+    );
+    reloadGame();
   }
 }
 
